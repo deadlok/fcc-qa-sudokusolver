@@ -4,12 +4,21 @@ class SudokuSolver {
     this.solution = ''
   }
 
-  validate(puzzleString) {
+  checkLength(puzzleString){
     if (puzzleString.length != 81) return false;
+    return true;
+  }
+
+  checkCharacter(puzzleString){
     if (puzzleString.search(/[^0-9.]/) >= 0 ) return false;
     return true;
   }
 
+  validate(puzzleString){
+    if (this.checkLength(puzzleString) && this.checkCharacter(puzzleString)) return true;
+    return false;
+  }
+  
   getRow(puzzleString, row){
     let rowStringArr=[]
     let start = 9*(row-1);

@@ -9,17 +9,17 @@ let solver = new Solver;
 
 suite('Unit Tests', () => {
     test ('#1 handles a valid puzzle string of 81 character', function (done){
-        assert.equal(solver.validate('1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.'),true);
+        assert.equal(solver.checkLength('1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.'),true);
         done();
     })
 
     test ('#2 handles a puzzle string with invalid characters', function (done){
-        assert.equal(solver.validate('X.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.'),false)
+        assert.equal(solver.checkCharacter('X.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.'),false)
         done();
     })
 
     test ('#3 handles a puzzle string that is not 81 characters in length', function (done){
-        assert.equal(solver.validate('91.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.'),false);
+        assert.equal(solver.checkLength('91.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37.'),false);
         done();
     })
 
