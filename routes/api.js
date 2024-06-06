@@ -13,7 +13,7 @@ module.exports = function (app) {
       let value = req.body.value;
       let failureReason = [];
 
-      //console.log('puzzle: '+puzzle+' coordinate: '+coordinate+ ' value: '+value)
+      console.log('puzzle: '+puzzle+' coordinate: '+coordinate+ ' value: '+value)
 
       if (!puzzle || !coordinate || !value ) 
         res.json({error:'Required field(s) missing'});
@@ -47,7 +47,7 @@ module.exports = function (app) {
   app.route('/api/solve')
     .post((req, res) => {
       let puzzle = req.body.puzzle;
-      console.log('puzzle: '+ puzzle)
+      //console.log('puzzle: '+ puzzle)
 
       if (!puzzle) 
         res.json({error: 'Required field missing'});
@@ -60,7 +60,7 @@ module.exports = function (app) {
 
       if (solver.solve(puzzle)){
         res.json({ solution: solver.solution});
-        console.log('solved! ' + solver.solution);
+        //console.log('solved! ' + solver.solution);
       } else {
         res.json({error: 'Puzzle cannot be solved'});
       }

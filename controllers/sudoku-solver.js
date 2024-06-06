@@ -31,8 +31,9 @@ class SudokuSolver {
 
   checkRowPlacement(puzzleString, row, column, value) {
     let rowStringArr = this.getRow(puzzleString, row);
+    rowStringArr[column-1] = '.' // reset number to empty in target position
     //console.log('row:' + row + ' col: ' + column + ' value: '+ value)
-    if (rowStringArr[column-1] != '.' || rowStringArr.indexOf(value.toString()) >= 0 ) {
+    if (rowStringArr.indexOf(value.toString()) >= 0 ) {
       //console.log('row failed');
       return false;
     }
@@ -51,9 +52,11 @@ class SudokuSolver {
 
   checkColPlacement(puzzleString, row, column, value) {
     let colStringArr=this.getCol(puzzleString, column);
+    colStringArr[row-1]='.'  // reset number to empty in target position
     //console.log(colStringArr[row-1])
     //console.log(colStringArr.indexOf(value.toString()))
-    if (colStringArr[row-1] != '.' || colStringArr.indexOf(value.toString()) >= 0 ) {
+    
+    if (colStringArr.indexOf(value.toString()) >= 0 ) {
       //console.log('col failed');
       return false;
     }
@@ -82,9 +85,10 @@ class SudokuSolver {
     let pos = (row - rowStart)*3 + (column-colStart) + 1 
     let zone = (rowStart-1)+(colStart-1)/3 + 1
     let blkStringArr = this.getRegion(puzzleString, zone);
+    blkStringArr[pos-1] = '.'; // reset number to empty in target position
     //console.log('row: '+ rowStart + ' col: '+ colStart + ' pos: ' + pos + ' zone: ' + zone)
 
-    if (blkStringArr[pos-1] != '.' || blkStringArr.indexOf(value.toString()) >= 0 ) {
+    if (blkStringArr.indexOf(value.toString()) >= 0 ) {
       //console.log('region failed');
       return false;
     }
