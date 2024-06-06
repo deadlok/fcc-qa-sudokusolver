@@ -25,7 +25,6 @@ module.exports = function (app) {
         res.json({error: 'Invalid coordinate'})
       if (isNaN(value) || value < 1 || value > 9)
         res.json({error: 'Invalid value'})
-
       
       let row = 'ABCDEFGHI'.indexOf(coordinate.substring(0,1).toUpperCase()) + 1
       let col = coordinate.substring(1,2)
@@ -56,6 +55,8 @@ module.exports = function (app) {
         res.json({error:'Expected puzzle to be 81 characters long'});
       if (solver.checkCharacter(puzzle) == false) 
         res.json({error: 'Invalid characters in puzzle'});
+      if (solver.check(puzzle) == false)
+        res.json({error: 'Puzzle cannot be solved'})
 
       if (solver.solve(puzzle)){
         res.json({ solution: solver.solution});

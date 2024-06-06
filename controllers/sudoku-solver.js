@@ -98,7 +98,7 @@ class SudokuSolver {
     }
   }
 
-  check(puzzleString, finished) {
+  check(puzzleString, finished=false) {
     if (this.validate(puzzleString))
     if (finished) {
       if (!this.validate(puzzleString) || puzzleString.indexOf('.') >=0)
