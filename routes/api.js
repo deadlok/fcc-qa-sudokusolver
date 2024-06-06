@@ -21,7 +21,7 @@ module.exports = function (app) {
         res.json({error:'Expected puzzle to be 81 characters long'})
       if (solver.checkCharacter(puzzle) == false) 
         res.json({error: 'Invalid characters in puzzle'})
-      if (!/[A-I][0-9]/.test(coordinate.toUpperCase()))
+      if (!/^[A-I][1-9]$/.test(coordinate.toUpperCase()))
         res.json({error: 'Invalid coordinate'})
       if (isNaN(value) || value < 1 || value > 9)
         res.json({error: 'Invalid value'})
