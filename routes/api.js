@@ -60,7 +60,7 @@ module.exports = function (app) {
 
       if (solver.solve(puzzle)){
         res.json({ solution: solver.solution});
-        console.log('solved!! ' + solver.solution);
+        console.log('solved! ' + solver.solution);
       } else {
         res.json({error: 'Puzzle cannot be solved'});
       }

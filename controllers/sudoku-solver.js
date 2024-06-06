@@ -51,8 +51,9 @@ class SudokuSolver {
 
   checkColPlacement(puzzleString, row, column, value) {
     let colStringArr=this.getCol(puzzleString, column);
-
-    if (colStringArr[row-1] != '.' || colStringArr.indexOf(value.toString()) > 0 ) {
+    //console.log(colStringArr[row-1])
+    //console.log(colStringArr.indexOf(value.toString()))
+    if (colStringArr[row-1] != '.' || colStringArr.indexOf(value.toString()) >= 0 ) {
       //console.log('col failed');
       return false;
     }
@@ -83,7 +84,7 @@ class SudokuSolver {
     let blkStringArr = this.getRegion(puzzleString, zone);
     //console.log('row: '+ rowStart + ' col: '+ colStart + ' pos: ' + pos + ' zone: ' + zone)
 
-    if (blkStringArr[pos-1] != '.' || blkStringArr.indexOf(value.toString()) > 0 ) {
+    if (blkStringArr[pos-1] != '.' || blkStringArr.indexOf(value.toString()) >= 0 ) {
       //console.log('region failed');
       return false;
     }
