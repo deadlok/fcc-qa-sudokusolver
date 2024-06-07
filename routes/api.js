@@ -15,16 +15,27 @@ module.exports = function (app) {
 
       console.log('puzzle: '+puzzle+' coordinate: '+coordinate+ ' value: '+value)
 
-      if (!puzzle || !coordinate || !value ) 
+      if (!puzzle || !coordinate || !value ) {
         res.json({error:'Required field(s) missing'});
-      if (solver.checkLength(puzzle) == false)
+        return;
+      }
+      if (solver.checkLength(puzzle) == false) {
         res.json({error:'Expected puzzle to be 81 characters long'})
-      if (solver.checkCharacter(puzzle) == false) 
+        return;
+      }
+      if (solver.checkCharacter(puzzle) == false) {
         res.json({error: 'Invalid characters in puzzle'})
-      if (!/^[A-I][1-9]$/.test(coordinate.toUpperCase()))
-        res.json({error: 'Invalid coordinate'})
-      if (isNaN(value) || value < 1 || value > 9)
-        res.json({error: 'Invalid value'})
+        return;
+      }
+      if (!/^[A-I][1-9]$/.test(coordinate.toUpperCase())) {
+        res.json({error: 'Invalid coordinate'});
+        return;
+      }
+
+      if (isNaN(value) || value < 1 || value > 9) {
+        res.json({error: 'Invalid value'});
+        return;
+      }
       
       let row = 'ABCDEFGHI'.indexOf(coordinate.substring(0,1).toUpperCase()) + 1
       let col = coordinate.substring(1,2)
@@ -41,7 +52,7 @@ module.exports = function (app) {
       } else {
         res.json({valid:true})
       }
-
+      return;
     });
     
   app.route('/api/solve')
@@ -49,14 +60,22 @@ module.exports = function (app) {
       let puzzle = req.body.puzzle;
       //console.log('puzzle: '+ puzzle)
 
-      if (!puzzle) 
+      if (!puzzle) {
         res.json({error: 'Required field missing'});
-      if (solver.checkLength(puzzle) == false)
+        return;
+      }  
+      if (solver.checkLength(puzzle) == false){
         res.json({error:'Expected puzzle to be 81 characters long'});
-      if (solver.checkCharacter(puzzle) == false) 
+        return;
+      }
+      if (solver.checkCharacter(puzzle) == false){ 
         res.json({error: 'Invalid characters in puzzle'});
-      if (solver.check(puzzle) == false)
+        return;
+      }
+      if (solver.check(puzzle) == false){
         res.json({error: 'Puzzle cannot be solved'})
+        return;
+      }
 
       if (solver.solve(puzzle)){
         res.json({ solution: solver.solution});
@@ -64,6 +83,6 @@ module.exports = function (app) {
       } else {
         res.json({error: 'Puzzle cannot be solved'});
       }
-
+      return;
     });
 };
